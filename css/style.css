@@ -5,11 +5,14 @@ body{
 .container{
     border: 1.2px solid rgb(250, 248, 97);
     width: 550px;
-    height: 680vh;
+    height: 670px;
     border-radius: 15px;
     margin-top: 3em;
-    
+    overflow-y:scroll;
 }
+
+.container::-webkit-scrollbar { width: 0 !important }
+
 h3{
     font-size: 3em;
 }
@@ -63,8 +66,8 @@ align-items: center;
 /* justify-content: space-between; */
 gap: 12px;
 position: relative;
-left: 18em;
-
+left: 16em;
+bottom: 4.3em;
 }
 .fa-pen-to-square {
     color: rgb(20, 56, 20);
