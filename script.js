@@ -41,7 +41,7 @@ const dataAccept = () =>{
     data.push({
         text: textInput.value,   //store value in data obj 
         date : date.value,
-        textarea:desc.value,
+        textarea :desc.value,
     })
     console.log(data);
     createData();
@@ -56,12 +56,12 @@ const dataAccept = () =>{
 const createData = () => {
     tasks.innerHTML = "";
     data.map((o,i)=>{
-        return   tasks.innerHTML += ` <div id="i" class="task-item fw-bold  m-3">
-        <span class="task-id" id="title" >  ${o['text']}</span> <br>
+        return   tasks.innerHTML += ` <div id=${i} class="task-item fw-bold  m-3">
+        <b><span class="task-id" id="title" >  ${o['text']}</span> </b> <br>
         <span class="p-3 task-date" id="date">${o['date']}</span> <br>
         <span class="p-3" id="desc">${o['textarea']}</span> <br>
         <div class="options ">
-        <button  class=" mr-3" onclick="editData(this)"  data-bs-toggle="modal" data-bs-target="form"> edit</button>
+        <button  class=" fa-solid fa-pen-to-square  mr-3" onclick="editData(this)"  data-bs-toggle="modal" data-bs-target="form"> </button>
           <button  class="fa-solid fa-trash mr-3" onclick="removeData(this)"></button>
         </div>
       </div>`;
@@ -71,19 +71,24 @@ const createData = () => {
 
 const removeData = (e) =>{
      e.parentElement.parentElement.remove();
-     textInput.value = "";
-     date.value = "";
-     desc.value = "";
+
+     data.splice(e.parentElement.parentElement.id,1)
+     localStorage.setItem("data",JSON.stringify(data));
+
+    //  textInput.value = "";
+    //  date.value = "";
+    //  desc.value = "";
 }
 
 
 
-const editData = (e) =>{
-    e.parentElement.parentElement.remove();
+let editData = (e) =>{
+
     let editInput =  e.parentElement.parentElement; //target parent element 
-    textInput.value = editInput.childrens[0].innerHTML;
-    date.value =  editInput.childrens[1].innerHTML;
-    desc.value =  editInput.childrens[0].innerHTML;
+    textInput.value = editInput.children[0].innerHTML;
+    date.value =  editInput.children[2].innerHTML;
+    desc.value =  editInput.children[1].innerHTML;
+    removeData(e);
    
 }
 
